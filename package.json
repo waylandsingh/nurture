@@ -1,0 +1,19 @@
+{
+  "name": "nurture",
+  "version": "1.0.0",
+  "description": "a tool to help plant parents and fermenters care for their babies",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waylandsingh/nurture.git"
+  },
+  "author": "wayland singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/waylandsingh/nurture/issues"
+  },
+  "homepage": "https://github.com/waylandsingh/nurture#readme"
+}
