@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import CardContainer from './components/CardContainer';
 
 const App = props => {
     return (
       <div className="Application Container">
-        Hello there! my pdddddasdasdlant-y friends!dfgfgdf
+        <CardContainer />
       </div>
     );
   };

@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+console.log('here i am');
 module.exports = {
   entry: ['./client/index.js'],
   output: {
@@ -16,21 +18,19 @@ module.exports = {
       // not really sure about this sectino for webpack 5
       publicPath: 'build',
 
-      directory: path.join(__dirname, 'build'), // localhost 8080 assets are here
+      directory: path.resolve(__dirname, 'build'), // localhost 8080 assets are here
     },
     // enable HMR on the devServer
     hot: true,
+    open: true,
     // fallback to root for other urls
     historyApiFallback: true,
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    /**
-     * proxy is required in order to make api calls to
-     * express server while using hot-reload webpack server
-     * routes api fetch requests from localhost:8080/api/* (webpack dev server)
-     * to localhost:3000/api/* (where our Express server is running)
-     */
     proxy: {
       '/api/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+      '/**': {
         target: 'http://localhost:3000/',
         secure: false,
       },
