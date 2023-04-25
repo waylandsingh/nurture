@@ -1,5 +1,5 @@
 const path = require('path');
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: ['./client/index.js'],
   output: {
@@ -13,9 +13,10 @@ module.exports = {
     port: 8080,
     // match the output path
     static: {
-      directory: path.resolve(__dirname, 'dist'),
-      // match the output 'publicPath'
-      publicPath: '/',
+      // not really sure about this sectino for webpack 5
+      publicPath: 'build',
+
+      directory: path.join(__dirname, 'build'), // localhost 8080 assets are here
     },
     // enable HMR on the devServer
     hot: true,
@@ -30,10 +31,6 @@ module.exports = {
      */
     proxy: {
       '/api/**': {
-        target: 'http://localhost:3000/',
-        secure: false,
-      },
-      '/assets/**': {
         target: 'http://localhost:3000/',
         secure: false,
       },
@@ -84,12 +81,13 @@ module.exports = {
     ],
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: './client/index.html',
-    // }),
+    new HtmlWebpackPlugin({
+      template: './client/index.html',
+    }),
   ],
   resolve: {
     // Enable importing JS / JSX files without specifying their extension
     extensions: ['.js', '.jsx'],
   },
+  target: 'web',
 };
