@@ -4,6 +4,9 @@
   "description": "a tool to help plant parents and fermenters care for their babies",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server/server.js",
+    "build": "webpack",
+    "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --hot --progress --color\" \"nodemon ./server/server.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +18,19 @@
   "bugs": {
     "url": "https://github.com/waylandsingh/nurture/issues"
   },
-  "homepage": "https://github.com/waylandsingh/nurture#readme"
+  "homepage": "https://github.com/waylandsingh/nurture#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "webpack": "^5.80.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-react": "^7.18.6",
+    "babel-loader": "^9.1.2",
+    "webpack-cli": "^5.0.2"
+  }
 }

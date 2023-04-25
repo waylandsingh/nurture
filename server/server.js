@@ -6,6 +6,8 @@ const app = express();
 const PORT = 3000;
 // start listening on port 3000
 
+app.use('/build', express.static(path.join(__dirname, '../build')));
+
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, './../client/index.html'));
 });
