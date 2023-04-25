@@ -25,6 +25,11 @@ app.get('/', async (req, res) => {
   res.sendFile(path.resolve(__dirname, './../client/index.html'));
 });
 
+app.get('/getCards', (req, res) => {
+  console.log('here!');
+  res.status(200).json({ me: 'youu!' });
+});
+
 app.listen(PORT, () => {
   console.log(`started a new app: listening on port ${PORT}`);
 });

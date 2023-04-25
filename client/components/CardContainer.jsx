@@ -1,21 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from './Card'
 
 
-export default props=>{
-    const fakeTime = new Date()
-    // on load, want to retrieve the current cards from the database
-    // [cards, setCards] = useState([])
+//dummy data for 1 card
+const fakeTime = new Date()
+const card1props = {
+    name:'Kefir',
+    lastFeedDate:fakeTime.toString(),
+    nextFeedDate:fakeTime.toString(),
+    feedInstructions:'blah blah',
+    notes:'take good care of me',
+    archived:false
+}
 
-    //dummy data for 1 card
-    const card1props = {
-        name:'Kefir',
-        lastFeedDate:fakeTime.toString(),
-        nextFeedDate:fakeTime.toString(),
-        feedInstructions:'blah blah',
-        notes:'take good care of me',
-        archived:false
-    }
+export default props=>{
+    // on load, want to retrieve the current cards from the database
+    let [cards, setCards] = useState([card1props])
+
+    useEffect(()=>{
+        fetch('/getCards')
+        .then(response=>response.json())
+        .then((data)=>{
+            console.log(data)
+        })
+
+    },[cards])
+
+    
     // for each of them, create a new card
     return <div className="card-container">
         <h2>Here is where the cards are rendered</h2>
