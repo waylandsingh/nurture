@@ -9,33 +9,26 @@ const card1props = {
     lastFeedDate:fakeTime.toString(),
     nextFeedDate:fakeTime.toString(),
     feedInstructions:'blah blah',
-    notes:'take good care of me',
+    notes:'use quality milk products',
     archived:false
 }
 
 export default props=>{
     // on load, want to retrieve the current cards from the database
-    let [cards, setCards] = useState([card1props,{}])
+    console.log(props)
 
-    useEffect(()=>{
-        fetch('/getCards')
-        .then(response=>response.json())
-        .then((data)=>{
-            // console.log('use effect call',data)
-            // render the overall number of cards from the returned data
-            setCards([...cards,...data])
-            console.log(cards)
-        })
-
-    },[])
+    let cardComponents = props.cardList.map(card=>{
+        return <Card {...card} key={card._id} />
+    })
 
     
     // for each of them, create a new card
     return <div className="card-container">
         <h2>Here is where the cards are rendered</h2>
-        <button>click to add new baby</button>
+        
         <Card {...card1props}/>
-        {JSON.stringify(cards)}
+        {cardComponents}
+        
 
     </div>
 }
