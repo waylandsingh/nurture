@@ -3,7 +3,11 @@ const path = require('path');
 const express = require('express');
 
 // mongodbAtlas
-const client = require('./controllers/cardController');
+const cardController = require('./controllers/cardController');
+const { captureRejectionSymbol } = require('events');
+const mongoose = require('mongoose');
+const { databaseURI } = require('./config');
+mongoose.connect(databaseURI);
 
 const app = express();
 const PORT = 3000;
@@ -12,21 +16,14 @@ const PORT = 3000;
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
 app.get('/', async (req, res) => {
-  try {
-    await client.connect();
-    const databaseList = await client.db().admin().listDatabases();
-    console.log(databaseList.databases);
-  } catch (e) {
-    console.log(e);
-  } finally {
-    client.close();
-  }
   console.log('in the root');
   res.sendFile(path.resolve(__dirname, './../client/index.html'));
 });
 
-app.get('/getCards', (req, res) => {
-  console.log('here!');
+app.get('/getCards', cardController.getCards, (req, res) => {
+  // query the mongo to get all cards
+  console.log('here in the get cards route!');
+  console.log(res.locals.cardsList);
   res.status(200).json({ me: 'youu!' });
 });
 

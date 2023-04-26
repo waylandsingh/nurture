@@ -1,7 +1,7 @@
 import React from "react";
 
 export default props =>{
-    console.log(props)
+    // console.log(props)
     return <div className="card">
         <p>{props.name}</p>
         <p>last fed: {props.lastFeedDate}</p>

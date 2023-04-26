@@ -1,0 +1,16 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+/**
+ schema for card creation
+*/
+const cardSchema = new Schema({
+  name: { type: String, required: true, unique: false },
+  nextFeedDate: { type: Date, default: Date.now },
+  lastFeedDate: { type: Date, default: Date.now },
+  feedInstructions: { type: String, required: true, unique: false },
+  notes: { type: String, required: true, unique: false },
+  archived: { type: Boolean, required: true },
+});
+
+module.exports = mongoose.model('Card', cardSchema, 'Cards');

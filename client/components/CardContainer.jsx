@@ -21,7 +21,7 @@ export default props=>{
         fetch('/getCards')
         .then(response=>response.json())
         .then((data)=>{
-            console.log(data)
+            console.log('use effect call',data)
         })
 
     },[cards])

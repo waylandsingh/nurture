@@ -15,7 +15,7 @@ module.exports = {
     port: 8080,
     // match the output path
     static: {
-      // not really sure about this sectino for webpack 5
+      // not really sure about this section for webpack 5
       publicPath: 'build',
 
       directory: path.resolve(__dirname, 'build'), // localhost 8080 assets are here
