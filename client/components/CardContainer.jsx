@@ -15,16 +15,19 @@ const card1props = {
 
 export default props=>{
     // on load, want to retrieve the current cards from the database
-    let [cards, setCards] = useState([card1props])
+    let [cards, setCards] = useState([card1props,{}])
 
     useEffect(()=>{
         fetch('/getCards')
         .then(response=>response.json())
         .then((data)=>{
-            console.log('use effect call',data)
+            // console.log('use effect call',data)
+            // render the overall number of cards from the returned data
+            setCards([...cards,...data])
+            console.log(cards)
         })
 
-    },[cards])
+    },[])
 
     
     // for each of them, create a new card
@@ -32,6 +35,7 @@ export default props=>{
         <h2>Here is where the cards are rendered</h2>
         <button>click to add new baby</button>
         <Card {...card1props}/>
+        {JSON.stringify(cards)}
 
     </div>
 }

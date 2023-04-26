@@ -1,17 +1,4 @@
-// const { MongoClient, ServerApiVersion } = require('mongodb');
-// const uri = require('./../config');
 const Card = require('../models/cardModel');
-
-// // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-// mongo = new MongoClient(uri, {
-//   serverApi: {
-//     version: ServerApiVersion.v1,
-//     strict: true,
-//     deprecationErrors: true,
-//   },
-// });
-
-//
 
 const card1props = {
   name: 'Kefir',
@@ -22,7 +9,7 @@ const card1props = {
   archived: false,
 };
 
-Card.create({ ...card1props });
+// Card.create({ ...card1props });
 
 const cardController = {
   getCards: async (req, res, next) => {
@@ -30,22 +17,65 @@ const cardController = {
 
     next();
   },
+  // add card
+  addCard: async (req, res, next) => {
+    // console.log(req.body);
+    const cardholder = await Card.create({ ...req.body });
+    res.locals.card = cardholder;
+    // console.log(cardholder._id.valueOf());//getting the id for later
+    next();
+  },
+  // edit card
+  editCard: async (req, res, next) => {
+    // need to get the ID inside the request
+    const _id = req.body._id;
+    // ideally re-transmits the info inside the form
+
+    // also need the fields to update, if needed
+    // find and update and return using that ID
+    try {
+      // const cardholder = await Card.findOne({ _id: _id });
+      const cardholder = await Card.findOneAndUpdate({ _id: _id }, req.body);
+      res.locals.card = await Card.find({ _id: _id });
+      next();
+    } catch (error) {
+      next(error);
+    }
+  },
+  // delete card
+  deleteCard: async (req, res, next) => {
+    const _id = req.body._id;
+    try {
+      // find and delete and return using that ID
+      res.locals.card = await Card.findOneAndDelete({ _id: _id });
+      next();
+    } catch (error) {
+      next(error);
+    }
+  },
+  feedCard: async (req, res, next) => {
+    // const _id = req.body._id; // get cardID
+    const { _id, feedPeriodDays } = req.body;
+    try {
+      // find and update the feed dates and return using that ID
+      // update feed date to now
+      const lastfeed = new Date();
+      let nextfeed = new Date();
+      nextfeed.setDate(nextfeed.getDate() + feedPeriodDays);
+      await Card.findOneAndUpdate(
+        { _id: _id },
+        {
+          lastFeedDate: lastfeed.now,
+          nextFeedDate: nextfeed,
+        }
+      );
+      res.locals.card = await Card.findOne({ _id: _id });
+      next();
+    } catch (error) {
+      next(error);
+    }
+  },
+  // feed and re-up
 };
 
 module.exports = cardController;
-
-// async function run() {
-//   try {
-//     // Connect the client to the server	(optional starting in v4.7)
-//     await client.connect();
-//     // Send a ping to confirm a successful connection
-//     await client.db('admin').command({ ping: 1 });
-//     console.log(
-//       'Pinged your deployment. You successfully connected to MongoDB!'
-//     );
-//   } finally {
-//     // Ensures that the client will close when you finish/error
-//     await client.close();
-//   }
-// }
-// // run().catch(console.dir);

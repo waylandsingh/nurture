@@ -8,6 +8,8 @@ const cardSchema = new Schema({
   name: { type: String, required: true, unique: false },
   nextFeedDate: { type: Date, default: Date.now },
   lastFeedDate: { type: Date, default: Date.now },
+  dateCreated: { type: Date, default: Date.now },
+  feedPeriodDays: { type: Number, default: 7 },
   feedInstructions: { type: String, required: true, unique: false },
   notes: { type: String, required: true, unique: false },
   archived: { type: Boolean, required: true },
