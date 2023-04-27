@@ -23,7 +23,7 @@ export default props=>{
 
     
     // for each of them, create a new card
-    return <div className="card-container text-green-700 flex overflow-x-auto">
+    return <div className="card-container text-green-700 flex flex-col sm:flex-row overflow-auto">
         
         {cardComponents}
         

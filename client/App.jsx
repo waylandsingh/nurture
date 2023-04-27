@@ -20,13 +20,13 @@ const App = props => {
     },[cardAdded]) // can also update this on changes to count (from delete, add?)
 
     return (
-      <div className="flex flex-col">
+      <div className="flex sm:flex-col flex-col-reverse">
         
         
       
          <CardContainer cardList={cards}/>
-
-         <button onClick={e=>{
+      <div id="addCardForm" className="flex flex-col self-center">
+        <button className="self-center" onClick={e=>{
           console.log('switch state')
           setShowingAddCard(!showingAddCard)
           }}>click to add new baby</button>
@@ -35,6 +35,8 @@ const App = props => {
         <AddCard cardAdded={cardAdded} setCardAdded={setCardAdded}/>}
         
         
+      </div>
+         
       </div>
     );
   };
