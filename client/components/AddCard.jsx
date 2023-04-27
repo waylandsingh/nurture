@@ -15,6 +15,8 @@ export default props=>{
             body: JSON.stringify({ ...inputs })
         };
 
+        console.log(inputs)
+
         event.preventDefault();
         // use  fetch HERE to create a post req to the right endpoint
         fetch('/addCard', requestOptions)
@@ -40,7 +42,7 @@ export default props=>{
               required
             />
             </label>
-            <label>feeding interval(days):
+            <label>checkup interval(days):
               <input 
                 type="number" 
                 name="feedPeriodDays" 
@@ -63,6 +65,14 @@ export default props=>{
                 type="text" 
                 name="notes" 
                 value={inputs.notes || ""} 
+                onChange={handleChange}
+              />
+              </label>
+              <label>imageURL
+              <input 
+                type="text" 
+                name="imageURL" 
+                value={inputs.imageURL || ""} 
                 onChange={handleChange}
               />
               </label>

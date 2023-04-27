@@ -19,7 +19,7 @@ const cardController = {
   },
   // add card
   addCard: async (req, res, next) => {
-    // console.log(req.body);
+    console.log(req.body);
     const cardholder = await Card.create({ ...req.body });
     res.locals.card = cardholder;
     // console.log(cardholder._id.valueOf());//getting the id for later

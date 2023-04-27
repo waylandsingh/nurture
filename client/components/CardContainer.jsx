@@ -16,6 +16,7 @@ const card1props = {
 export default props=>{
     // on load, want to retrieve the current cards from the database
     console.log(props)
+    
 
     let cardComponents = props.cardList.map(card=>{
         return <Card {...card} key={card._id} />

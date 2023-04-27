@@ -12,6 +12,7 @@ const cardSchema = new Schema({
   feedPeriodDays: { type: Number, default: 7 },
   feedInstructions: { type: String, required: true, unique: false },
   notes: { type: String, default: '', unique: false },
+  imageURL: { type: String, default: './../images/pickles.jpg' },
   archived: { type: Boolean, default: false, required: true },
 });
 

@@ -8,7 +8,7 @@ export default props =>{
     // use state to manage inputs
     const [inputs, setInputs] = useState({...props});
     const [formDisabled, setFormDisabled] = useState(true);
-
+    const [deleted, setDeleted] = useState(false)
     // handle the change to input
     const handleChange = (event) => {
         const name = event.target.name;
@@ -40,10 +40,36 @@ export default props =>{
         })
       
     };
+
+    // handle deletion
+    const handleDelete = (event)=>{
+      event.preventDefault()
+      setDeleted(true)
+      // make the database fetch req
+      const requestOptions = {
+        method: 'Delete', // edit this
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ _id:inputs._id })
+    };
+
+    // use  fetch HERE to create a delete req to the right endpoint
+    fetch('/deleteCard', requestOptions)
+      .then(data=>{
+        return data.json()
+      })
+      .then( data=>{
+        console.log(data);
+        // setInputs(data[0])
+      })
+      .catch(e=>{
+        console.log('error in deleting the card', e);
+      })
+
+    }
     // console.log(props) //hover:animate-bounce
-    return <div className="card max-w-md rounded-sm shadow-lg m-2 ">
+    return <div className={`card h-1/2 max-w-md rounded-sm shadow-lg m-2 ${!deleted||'hidden'}`} >
         
-        <img className="w-full" src="./../images/pickles.jpg" alt="project photo"/>
+        <img className="w-full" src={inputs.imageURL} alt="project photo"/>
         <form className="w-full" onSubmit={()=>{handleSubmit}} >
             <fieldset 
               className="flex flex-col space-y-6" 
@@ -92,11 +118,15 @@ export default props =>{
                 </textarea>
 
               </label>
-              {!formDisabled && <input type="submit" onClick={handleSubmit}/>}
+            
+
+              {!formDisabled && <input type="submit" className="bg-green-200" onClick={handleSubmit}/>}
+              {!formDisabled && <button onClick={handleDelete}>delete</button>}
             </fieldset>
         </form>
-            <button onClick={()=>setFormDisabled(!formDisabled)}>enable edits</button>
         
+            <button onClick={()=>setFormDisabled(!formDisabled)}>enable edits</button>
+            
         
         {/* <p>{props.name}</p> */}
         {/* <p>last fed: {props.lastFeedDate}</p>
