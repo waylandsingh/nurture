@@ -13,6 +13,7 @@ const app = express();
 const PORT = 3000;
 // start listening on port 300099
 
+app.use(express.static('client'));
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
 app.use(express.json());

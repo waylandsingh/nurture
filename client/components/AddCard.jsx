@@ -29,46 +29,46 @@ export default props=>{
 
     // needs to be able to call the setState from the parent!
     return (
-        <div className="self-center">
-            <form onSubmit={handleSubmit}>
-      <label>name:
-      <input 
-        type="text" 
-        name="name" 
-        value={inputs.name || ""} 
-        onChange={handleChange}
-        required
-      />
-      </label>
-      <label>feeding interval(days):
-        <input 
-          type="number" 
-          name="feedPeriodDays" 
-          value={inputs.feedPeriodDays || ""} 
-          onChange={handleChange}
-          required
-        />
-        </label>
-        <label>feeding instructions:
-        <input 
-          type="text" 
-          name="feedInstructions" 
-          value={inputs.feedInstructions || ""} 
-          onChange={handleChange}
-          required
-        />
-        </label>
-        <label>notes:
-        <input 
-          type="text" 
-          name="notes" 
-          value={inputs.notes || ""} 
-          onChange={handleChange}
-        />
-        </label>
-        
-        <input type="submit" />
-    </form>
+        <div className="self-center ">
+            <form className="flex flex-col" onSubmit={handleSubmit}>
+            <label>name:
+            <input 
+              type="text" 
+              name="name" 
+              value={inputs.name || ""} 
+              onChange={handleChange}
+              required
+            />
+            </label>
+            <label>feeding interval(days):
+              <input 
+                type="number" 
+                name="feedPeriodDays" 
+                value={inputs.feedPeriodDays || ""} 
+                onChange={handleChange}
+                required
+              />
+              </label>
+              <label>feeding instructions:
+              <input 
+                type="text" 
+                name="feedInstructions" 
+                value={inputs.feedInstructions || ""} 
+                onChange={handleChange}
+                required
+              />
+              </label>
+              <label>notes:
+              <input 
+                type="text" 
+                name="notes" 
+                value={inputs.notes || ""} 
+                onChange={handleChange}
+              />
+              </label>
+              
+              <input type="submit" />
+          </form>
         </div>
     )
 }
