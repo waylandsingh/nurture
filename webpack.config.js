@@ -14,12 +14,12 @@ module.exports = {
     host: 'localhost',
     port: 8080,
     // match the output path
-    static: {
-      // not really sure about this section for webpack 5
-      publicPath: 'build',
+    // static: {
+    //   // not really sure about this section for webpack 5
+    //   publicPath: 'build',
 
-      directory: path.resolve(__dirname, 'build'), // localhost 8080 assets are here
-    },
+    //   directory: path.resolve(__dirname, 'build'), // localhost 8080 assets are here
+    // },
     // enable HMR on the devServer
     hot: true,
     open: true,
@@ -63,7 +63,7 @@ module.exports = {
       {
         test: /.(css|scss)$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(png|jpg|gif|woff|woff2|eot|ttf|svg|ico)$/,

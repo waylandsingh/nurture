@@ -11,8 +11,8 @@ const cardSchema = new Schema({
   dateCreated: { type: Date, default: Date.now },
   feedPeriodDays: { type: Number, default: 7 },
   feedInstructions: { type: String, required: true, unique: false },
-  notes: { type: String, required: true, unique: false },
-  archived: { type: Boolean, required: true },
+  notes: { type: String, default: '', unique: false },
+  archived: { type: Boolean, default: false, required: true },
 });
 
 module.exports = mongoose.model('Card', cardSchema, 'Cards');
